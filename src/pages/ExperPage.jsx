@@ -1,20 +1,13 @@
 import React from 'react';
 import BackButton from '../components/BackButton';
-import experbg from '../assets/experience-bg.jpg';
+import './ExperPage.css';
 
 export default function ExperPage() {
   return (
     /* 1. 전체 화면 배경 및 중앙 정렬 */
     <div 
       /* w-screen h-screen으로 브라우저 가장자리에 딱 붙게 설정 */
-      className="relative w-screen h-screen pt-[120px] pb-[120px] px-[80px] overflow-hidden"
-      style={{ 
-        backgroundImage: `url(${experbg})`,
-        /* 이미지 비율을 무시하고 화면 전체(100% 100%)에 꽉 채움 */
-        backgroundSize: '100% 100%', 
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="exper-page-container relative w-screen h-screen pt-[120px] pb-[120px] px-[80px] overflow-hidden"
     >
       {/* 화면 내용 영역 */}
       {/* 🚧 공사 안내판 메인 박스 (반응형 비율 적용) */}

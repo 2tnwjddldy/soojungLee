@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import mainbg from '../assets/main-bg.jpg';
+import './mainPage.css';
 
 export default function MainPage() {
   const navigate = useNavigate();
 
   return (
     <main 
-      className="relative w-full h-screen bg-cover bg-center flex items-center justify-center p-4"
-      style={{ backgroundImage: `url(${mainbg})` }}
+      className="main-page-container relative w-full h-screen bg-cover bg-center flex items-center justify-center p-4"
     >
       {/* 3개 버튼 세로 그룹 (MainButton) */}
       <div className="flex flex-col items-center gap-6 w-full max-w-[320px]">

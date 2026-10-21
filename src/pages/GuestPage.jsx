@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BackButton from '../components/BackButton';
-import guestbook from '../assets/guestbook-bg.png';
 import saveBtnImg from '../assets/enterButton.jpg';
 import failImg from '../assets/failImg.jpg';
+import './GuestPage.css';
 
 export default function GuestPage() {
   // 텍스트 입력값 상태 관리
@@ -97,25 +97,14 @@ export default function GuestPage() {
 
   return (
     <div 
-      className="relative w-screen h-screen overflow-hidden py-[13.33vh] px-[10.00vw]"
-      style={{ 
-        backgroundImage: `url(${guestbook})`,
-        backgroundSize: '100% 100%', 
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="guest-page-container relative w-screen h-screen overflow-hidden py-[13.33vh] px-[10.00vw]"
     >
       {/* 📌 메인 컨텐츠 컨테이너: 좌우 영역 배치 */}
       <div className="w-full h-full relative flex items-center justify-between">
         
         {/* ==================== 1. Write 영역 (420x594 비율) ==================== */}
         <div 
-          className="flex flex-col items-center justify-between p-[2vw] overflow-y-auto"
-          style={{
-            width: '29.17%',   /* 1440 기준 420px */
-            height: '77.0%',   /* 900 기준 594px */
-            marginTop: '17vh',
-          }}
+          className="guest-write-section flex flex-col items-center justify-between p-[2vw] overflow-y-auto"
         >
           {/* 타이틀 */}
           <h2 className="w-full text-center font-bold text-gray-800 text-[clamp(10px,1.5vw,25px)] truncate">
@@ -163,13 +152,7 @@ export default function GuestPage() {
 
         {/* ==================== 2. History 영역 (677x500 비율) ==================== */}
         <div 
-          className="flex items-center justify-between p-[0.5vw] overflow-hidden"
-          style={{
-            width: '57.00%',   /* 1440 기준 677px */
-            height: '65.56%',  /* 900 기준 500px */
-            gap: '12.00%',   /* 900 기준 594px */
-            marginTop: '-12vh',     /* 677 기준 77px 간격 */
-          }}
+          className="guest-history-section flex items-center justify-between p-[0.5vw] overflow-hidden"
         >
           {/* ----- History Left (최신 1번째 방명록) ----- */}
           {hasHistory && (

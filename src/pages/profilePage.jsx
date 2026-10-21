@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BackButton from '../components/BackButton';
-import profilebg from '../assets/profile-bg.png';
 import profileImg from '../assets/profileImg.jpg';
+import './profilePage.css';
 
 export default function ProfilePage() {
 
@@ -29,21 +29,11 @@ export default function ProfilePage() {
   return (
     <div 
       /* 화면 전체 크기 및 지정된 패딩(상단 120px, 좌측 80px) 적용 */
-      className="relative w-screen h-screen overflow-hidden flex items-center justify-center"
-      style={{ 
-        backgroundImage: `url(${profilebg})`,
-        backgroundSize: '100% 100%',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="profile-page-container relative w-screen h-screen overflow-hidden flex items-center justify-center"
     >
       {/* 📌 화면 영역(패딩 라인)에 딱 붙어서 위치하는 500x500 프로필 박스 */}
       <div 
-        className="flex flex-col items-center justify-center p-[2vw] rounded-[1vw] overflow-y-auto min-w-[220px] min-h-[300px] gap-[clamp(5px,2.5vh,50px)]"
-        style={{
-          width: '34.72%',   // 1440x900 기준 500px 비율
-          height: '55.56%',  
-        }}
+        className="profile-card-box flex flex-col items-center justify-center p-[2vw] rounded-[1vw] overflow-y-auto min-w-[220px] min-h-[300px] gap-[clamp(5px,2.5vh,50px)]"
       >
         
         {/* 1. 이미지 (가로 218.6px -> 218px, 세로 281px, 상단 정중앙) */}
