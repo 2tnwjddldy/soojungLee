@@ -29,9 +29,9 @@ export default function GuestPage() {
   // AI 이미지 생성 API 호출 함수 (Hugging Face Stable Diffusion + Line Art 프롬프트 조합)
   const generateCharacterImage = async (promptText) => {
 
-    // 첨부해주신 이미지 스타일(흑백 라인 아트, 미니멀한 얼굴)을 유도하는 프롬프트 엔지니어링
-    const styledPrompt = `minimalist black and white line art face caricature, simple doodle style, outline only, white background, ${promptText}`;
-
+    // 하찮고 귀여운 알록달록 웹툰 캐릭터 스타일
+    const styledPrompt = `silly cute webtoon character, simple doodle art, colorful pastel background, flat vector, minimalist lines, funny and cute, ${promptText}`;
+    
     try {
       // 💡 외부 허깅페이스 대신 우리 서버(Vercel Function)로 요청
       const response = await fetch("/api/generate-image", {
