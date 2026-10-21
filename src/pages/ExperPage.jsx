@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BackButton from '../components/BackButton';
 import experbg from '../assets/experience-bg.jpg';
 
 export default function ExperPage() {
+
+  useEffect(() => {
+    alert('해당 페이지는 준비중입니다!');
+  }, []);
+
   return (
     /* 1. 전체 화면 배경 및 중앙 정렬 */
     <div 
@@ -20,7 +25,6 @@ export default function ExperPage() {
       <div className="w-full h-full relative">
         {/* Experience 페이지 컨텐츠를 작성하는 곳 */}
       </div>
-      alert('해당 페이지는 준비중입니다 !');
 
       {/* 우측 하단 뒤로가기 버튼 */}
       <BackButton />
