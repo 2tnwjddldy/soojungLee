@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
     // 안정적인 SDXL 모델 사용
     const imageBlob = await hf.textToImage({
-      model: 'stabilityai/stable-diffusion-xl-base-1.0',
+      model: 'runwayml/stable-diffusion-v1-5',
       inputs: prompt,
       parameters: { num_inference_steps: 25 }
     });
