@@ -1,3 +1,5 @@
+import { HfInference } from '@huggingface/inference';
+
 export default async function handler(req, res) {
   // POST 요청만 허용
   if (req.method !== 'POST') {
@@ -5,34 +7,32 @@ export default async function handler(req, res) {
   }
 
   const { prompt } = req.body;
-  const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY; // Vercel 환경 변수에서 안전하게 가져옴
+  const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
+
+  if (!HUGGINGFACE_API_KEY) {
+    return res.status(500).json({ error: 'HUGGINGFACE_API_KEY is not set in environment variables.' });
+  }
 
   try {
-    const response = await fetch(
-      "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${HUGGINGFACE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ inputs: prompt }),
-      }
-    );
+    // 공식 SDK 인스턴스 생성
+    const hf = new HfInference(HUGGINGFACE_API_KEY);
 
-    if (!response.ok) {
-      const errText = await response.text();
-      return res.status(response.status).json({ error: errText });
-    }
+    // 안정적인 SDXL 모델 사용
+    const imageBlob = await hf.textToImage({
+      model: 'stabilityai/stable-diffusion-xl-base-1.0',
+      inputs: prompt,
+      parameters: { num_inference_steps: 25 }
+    });
 
-    // 허깅페이스에서 받은 이미지 바이너리 데이터를 클라이언트로 전달
-    const arrayBuffer = await response.arrayBuffer();
+    // Blob 데이터를 Buffer로 변환하여 클라이언트로 전송
+    const arrayBuffer = await imageBlob.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
     res.setHeader('Content-Type', 'image/png');
     return res.status(200).send(buffer);
+
   } catch (error) {
     console.error('Server Error:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: error.message || 'Internal Server Error' });
   }
 }
