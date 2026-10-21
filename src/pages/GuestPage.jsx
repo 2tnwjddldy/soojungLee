@@ -131,7 +131,7 @@ export default function GuestPage() {
             <textarea
               value={character}
               onChange={(e) => setCharacter(e.target.value)}
-              placeholder="캐릭터 만들기 ex. 동그란 얼굴, 동그란 눈, 동그란 코, 동그란 입, 긴 곱슬 머리"
+              placeholder="캐릭터 만들기 ex. 안경, 단발머리, 주근깨, 웃는 표정"
               className="w-full h-[32%] p-[1vw] focus:outline-none focus:ring-1 focus:ring-gray-200 resize-none text-[clamp(6px,1.0vw,14px)] text-gray-800 placeholder:text-gray-400"
             />
 
