@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   try {
     // Pollinations.ai 무제한 무료 AI 이미지 생성 API
-    const enhancedPrompt = `${prompt}, silly cute webtoon character style, simple doodle art, vibrant pastel color, flat minimalist, funny and derpy`;
+    const enhancedPrompt = `${prompt}, simple doodle art, colorful background, flat vector, minimalist lines, funny and cute`;
     const encodedPrompt = encodeURIComponent(enhancedPrompt);
     const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`;
 

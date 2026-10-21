@@ -30,7 +30,7 @@ export default function GuestPage() {
   const generateCharacterImage = async (promptText) => {
 
     // 하찮고 귀여운 알록달록 웹툰 캐릭터 스타일
-    const styledPrompt = `silly cute webtoon character, simple doodle art, colorful pastel background, flat vector, minimalist lines, funny and cute, ${promptText}`;
+    const styledPrompt = `simple doodle art, colorful background, flat vector, minimalist lines, funny and cute, ${promptText}`;
     
     try {
       // 💡 외부 허깅페이스 대신 우리 서버(Vercel Function)로 요청
@@ -131,7 +131,7 @@ export default function GuestPage() {
             <textarea
               value={character}
               onChange={(e) => setCharacter(e.target.value)}
-              placeholder="캐릭터 만들기 ex. 동그란 얼굴, 동그란 눈, 동그란 코, 동그란 입, 동글동글한 파마 머리"
+              placeholder="캐릭터 만들기 ex. 동그란 얼굴, 동그란 눈, 동그란 코, 동그란 입, 긴 곱슬 머리"
               className="w-full h-[32%] p-[1vw] focus:outline-none focus:ring-1 focus:ring-gray-200 resize-none text-[clamp(6px,1.0vw,14px)] text-gray-800 placeholder:text-gray-400"
             />
 
