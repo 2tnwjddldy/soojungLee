@@ -30,7 +30,7 @@ export default function GuestPage() {
   const generateCharacterImage = async (promptText) => {
 
     // 하찮고 귀여운 알록달록 웹툰 캐릭터 스타일
-    const styledPrompt = `simple doodle art, colorful background, flat vector, minimalist lines, funny and cute, ${promptText}`;
+    const styledPrompt = `cute human character portrait, simple vector art, solid white background, minimalist lines, funny and cute, ${promptText}`;
     
     try {
       // 💡 외부 허깅페이스 대신 우리 서버(Vercel Function)로 요청
