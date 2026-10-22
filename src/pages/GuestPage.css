@@ -1,24 +1,160 @@
+/* 방명록 전체 컨테이너 */
 .guest-page-container {
-  background-image: url('../assets/guestbook-bg.png');
+  background-image: url('../assets/guestbook-bg.jpg');
   background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 1440x900 기준 통합 레이아웃 래퍼 (기본 좌우 배치) */
+.guest-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* 배경 이미지 간격 0 지정 */
+}
+
+/* 
+  [요구사항 2, 6번 반영] 
+  - 기본(가로 배열): 세로가 긴 4:3 비율 형태 유지 (반응형 뷰포트 기준 연동)
+  - min-width, min-height를 통해 너무 작아지거나 찌그러지는 것 방지
+*/
+.guest-card-box {
+  width: 25vw;        /* 반응형 가로 크기 */
+  height: 33.33vw;    /* 4:3 비율에 맞춘 세로 크기 (가로 기준 계산) */
+  max-width: 420px;
+  max-height: 560px;
+  min-width: 260px;
+  min-height: 346px;
+  
+  box-sizing: border-box;
+  padding: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.guest-write-section {
-  width: 29.17%;
-  height: 77.0%;
-  margin-top: 17vh;
-}
-
+/* 좌측 History 영역 (배경 이미지 + 투명도 조절 방어) */
 .guest-history-section {
-  width: 57.00%;
-  height: 65.56%;
-  gap: 12.00%;
-  margin-top: -12vh;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../assets/history-bg.png');
+  border-radius: 12px 0 0 12px;
 }
 
-/* App.css */
+/* 우측 Write 영역 (배경 이미지 + 투명도 조절 방어) */
+.guest-write-section {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('../assets/write-bg.png');
+  border-radius: 0 12px 12px 0;
+}
+
+/* History 데이터 상하 스크롤 목록 */
+.guest-history-list {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+/* History 개별 아이템 (닉네임 + 본문) */
+.guest-history-item {
+  width: 100%;
+  padding: 8px 10px;
+  background-color: rgba(240, 242, 245, 0.8);
+  border-radius: 8px;
+  word-break: break-all;
+}
+
+.guest-history-nickname {
+  font-weight: bold;
+  color: #1f2937;
+  font-size: clamp(12px, 1.1vw, 15px);
+  margin-bottom: 4px;
+}
+
+.guest-history-comment {
+  color: #4b5563;
+  font-size: clamp(11px, 0.95vw, 14px);
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+
+/* Form 스타일 */
+.guest-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guest-input-single {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  background-color: rgba(242, 242, 245, 0.9);
+  border-radius: 6px;
+  font-size: clamp(11px, 0.95vw, 14px);
+  outline: none;
+}
+
+.guest-input-multi {
+  width: 100%;
+  height: 180px;
+  padding: 8px 10px;
+  background-color: rgba(242, 242, 245, 0.9);
+  border-radius: 6px;
+  resize: none;
+  font-size: clamp(11px, 0.95vw, 14px);
+  outline: none;
+}
+
+/* 
+  [요구사항 2, 7번 반영] 
+  - 700px 이하(세로 전환 구간): 상하 배치 (Write -> History 순)
+  - 세로 배치 시 가로가 넓은 3:4 비율 (가로 > 세로) 형태로 자동 전환
+*/
+@media (max-width: 700px) {
+  .guest-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .guest-card-box {
+    width: 85vw;       /* 모바일 화면에 맞춘 가로 너비 */
+    height: 63.75vw;   /* 3:4 비율에 맞춘 세로 크기 (85vw * 4/3) */
+    max-width: none;
+    max-height: none;
+    min-height: 250px;
+    border-radius: 12px;
+  }
+
+  /* 모바일에서 Write가 상단, History가 하단으로 배치 + 모서리 둥글게 원상복구 */
+  .guest-write-section {
+    order: 1;
+    margin-bottom: 0px; /* 간격 0 유지 */
+    border-radius: 12px 12px 0 0;
+  }
+
+  .guest-history-section {
+    order: 2;
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+/* App.css 반응형 구조 */
 .app-container {
   width: 100%;
   min-height: 100vh;
@@ -28,11 +164,10 @@
   background-color: #f0f2f5;
 }
 
-/* PC 화면일 때 (너비 768px 초과) */
 @media (min-width: 769px) {
   .content-box {
-    width: 400px;        /* 스마트폰 비율의 고정 너비 */
-    height: 800px;       /* 스마트폰 비율의 고정 높이 */
+    width: 400px;
+    height: 800px;
     background: #ffffff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 24px;
@@ -40,7 +175,6 @@
   }
 }
 
-/* 모바일 화면일 때 (너비 768px 이하) */
 @media (max-width: 768px) {
   .content-box {
     width: 100%;
