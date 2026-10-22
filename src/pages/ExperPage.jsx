@@ -77,7 +77,7 @@ export default function ExperPage() {
           <span className="desktop-icon-label">Projects</span>
         </div>
 
-        {/* 2. Skills (이미지 아이콘 적용) */}
+        {/* 2. study (이미지 아이콘 적용) */}
         <div className="desktop-icon-item" onClick={() => setActiveFolder('skills')}>
           <img src={skillsImg || logoIcon} alt="Skills" className="desktop-icon-img rounded-[10px]" />
           <span className="desktop-icon-label">Skills</span>

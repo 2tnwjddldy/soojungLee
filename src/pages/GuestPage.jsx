@@ -50,10 +50,10 @@ export default function GuestPage() {
   };
 
   return (
-    <div className="guest-page-container relative w-screen h-screen overflow-hidden">
+    <div className="guest-page-container relative w-screen min-h-screen">
       
       {/* 화면 전체 중앙 정렬 메인 영역 (PC: 좌/우, 700px 이하: 상/하) */}
-      <div className="guest-content-wrapper">
+      <div className="guest-content-wrapper ">
         
         {/* ==================== 1. History 영역 (좌측 / 700px 이하 하단) ==================== */}
         <div className="guest-card-box guest-history-section">

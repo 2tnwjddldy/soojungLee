@@ -7,6 +7,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+/* 모바일에서 전체 컨테이너 자체 스크롤이 가능하도록 변경 */
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 /* 1440x900 기준 통합 레이아웃 래퍼 (기본 좌우 배치) */
@@ -18,41 +22,36 @@
   gap: 0; /* 배경 이미지 간격 0 지정 */
 }
 
-/* 
-  [요구사항 2, 6번 반영] 
-  - 기본(가로 배열): 세로가 긴 4:3 비율 형태 유지 (반응형 뷰포트 기준 연동)
-  - min-width, min-height를 통해 너무 작아지거나 찌그러지는 것 방지
-*/
+/* 각 영역 카드 박스 공통 규격 */
 .guest-card-box {
-  width: 25vw;        /* 반응형 가로 크기 */
-  height: 33.33vw;    /* 4:3 비율에 맞춘 세로 크기 (가로 기준 계산) */
+  width: 25vw;        
+  height: 50.33vw;    
   max-width: 420px;
   max-height: 560px;
   min-width: 260px;
   min-height: 346px;
   
   box-sizing: border-box;
-  padding: 1.5vw;
+  padding: 4.5vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
-  background-size: cover;
+  /* 1, 3번 요구사항 반영: 영역 크기 변형에 맞춰 이미지 비율이 늘어나거나 줄어들도록 100% 100% 적용 */
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* 좌측 History 영역 (배경 이미지 + 투명도 조절 방어) */
+/* 좌측 History 영역 */
 .guest-history-section {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../assets/history-bg.png');
-  border-radius: 12px 0 0 12px;
+  background-image: url('../assets/history-bg.jpg');
 }
 
-/* 우측 Write 영역 (배경 이미지 + 투명도 조절 방어) */
+/* 우측 Write 영역 */
 .guest-write-section {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('../assets/write-bg.png');
-  border-radius: 0 12px 12px 0;
+  background-image: url('../assets/write-bg.jpg');
 }
 
 /* History 데이터 상하 스크롤 목록 */
@@ -70,21 +69,19 @@
 .guest-history-item {
   width: 100%;
   padding: 8px 10px;
-  background-color: rgba(240, 242, 245, 0.8);
-  border-radius: 8px;
   word-break: break-all;
 }
 
 .guest-history-nickname {
   font-weight: bold;
   color: #1f2937;
-  font-size: clamp(12px, 1.1vw, 15px);
+  font-size: clamp(10px, 1.0vw, 15px);
   margin-bottom: 4px;
 }
 
 .guest-history-comment {
   color: #4b5563;
-  font-size: clamp(11px, 0.95vw, 14px);
+  font-size: clamp(9px, 0.90vw, 14px);
   line-height: 1.35;
   white-space: pre-wrap;
 }
@@ -103,9 +100,8 @@
   width: 100%;
   height: 36px;
   padding: 0 10px;
-  background-color: rgba(242, 242, 245, 0.9);
   border-radius: 6px;
-  font-size: clamp(11px, 0.95vw, 14px);
+  font-size: clamp(10px, 0.90vw, 14px);
   outline: none;
 }
 
@@ -113,45 +109,59 @@
   width: 100%;
   height: 180px;
   padding: 8px 10px;
-  background-color: rgba(242, 242, 245, 0.9);
   border-radius: 6px;
   resize: none;
-  font-size: clamp(11px, 0.95vw, 14px);
+  font-size: clamp(10px, 0.90vw, 14px);
   outline: none;
 }
 
 /* 
-  [요구사항 2, 7번 반영] 
-  - 700px 이하(세로 전환 구간): 상하 배치 (Write -> History 순)
-  - 세로 배치 시 가로가 넓은 3:4 비율 (가로 > 세로) 형태로 자동 전환
+  [요구사항 2, 3번 반영] 
+  - 700px 이하(세로 전환 구간): 세로 정렬 배치
+  - History가 위로, Write가 아래로 오도록 order 조정 (History: 1, Write: 2)
+  - 세로 모드에서도 배경 이미지가 영역에 맞게 자연스럽게 변형됨
 */
 @media (max-width: 700px) {
+  .guest-page-container {
+    align-items: flex-start; /* 상단부터 자연스럽게 스크롤되도록 정렬 변경 */
+    padding: 24px 0;         /* 상하 여백 추가 */
+  }
+
   .guest-content-wrapper {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 20px;               /* 상하 노트 간격 */
+    width: 100%;
   }
 
   .guest-card-box {
-    width: 85vw;       /* 모바일 화면에 맞춘 가로 너비 */
-    height: 63.75vw;   /* 3:4 비율에 맞춘 세로 크기 (85vw * 4/3) */
+    width: 58vw;       
+    height: 64vw;   
     max-width: none;
     max-height: none;
-    min-height: 250px;
-    border-radius: 12px;
+    min-height: 220px;
+    padding: 6vw 8vw;
   }
 
-  /* 모바일에서 Write가 상단, History가 하단으로 배치 + 모서리 둥글게 원상복구 */
-  .guest-write-section {
-    order: 1;
-    margin-bottom: 0px; /* 간격 0 유지 */
-    border-radius: 12px 12px 0 0;
-  }
-
+  /* 2번 요구사항: 세로 정렬 시 History가 상단, Write가 하단으로 배치 */
   .guest-history-section {
-    order: 2;
-    border-radius: 0 0 12px 12px;
+    order: 1;
   }
+
+  .guest-write-section {
+    order: 2;
+  }
+
+  /* Form 스타일 */
+.guest-form {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 }
 
 /* App.css 반응형 구조 */
@@ -170,7 +180,6 @@
     height: 800px;
     background: #ffffff;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 24px;
     overflow-y: auto;
   }
 }

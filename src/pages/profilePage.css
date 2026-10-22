@@ -1,6 +1,7 @@
 .profile-page-container {
   background-image: url('../assets/profile-bg.png');
-  background-size: cover;
+  /* PC 기본값: 기존 방식대로 100% 100% 꽉 채우기 */
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -21,7 +22,7 @@
 }
 
 /* PC 화면일 때 (너비 768px 초과) */
-@media (min-width: 769px) {
+@media (min-width: 76px) {
   .content-box {
     width: 400px;        /* 스마트폰 비율의 고정 너비 */
     height: 800px;       /* 스마트폰 비율의 고정 높이 */
@@ -38,5 +39,10 @@
     width: 100%;
     height: 100vh;
     background: #ffffff;
+  }
+
+  /* 모바일에서만 세로 길이에 맞추고 가로는 비율 유지 및 넘침 시 숨김 처리 */
+  .profile-page-container {
+    background-size: auto 100%;
   }
 }
